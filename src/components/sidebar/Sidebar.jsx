@@ -63,6 +63,118 @@ export default function Sidebar() {
             />
             <span className="sidebarFriendName">Rohan Roy</span>
           </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
+          <li className="sidebarFriend">
+            <img
+              src="/assets/persons/2.jpeg"
+              alt=""
+              className="sidebarFriendImage"
+            />
+            <span className="sidebarFriendName">Rohan Roy</span>
+          </li>
         </ul>
       </div>
     </div>
