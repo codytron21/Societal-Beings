@@ -10,6 +10,8 @@ import {
   Event,
   School,
 } from "@material-ui/icons";
+import { Users } from "../../dummyData";
+import Friends from "../friends/Friends";
 export default function Sidebar() {
   return (
     <div className="sidebar">
@@ -55,126 +57,9 @@ export default function Sidebar() {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/persons/2.jpeg"
-              alt=""
-              className="sidebarFriendImage"
-            />
-            <span className="sidebarFriendName">Rohan Roy</span>
-          </li>
+          {Users.map((u) => (
+            <Friends key={u.id} user={u} />
+          ))}
         </ul>
       </div>
     </div>
