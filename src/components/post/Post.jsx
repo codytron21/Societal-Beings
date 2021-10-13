@@ -1,35 +1,38 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
-export default function Post() {
+import { Users } from "../../dummyData";
+export default function Post({ post }) {
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
             <img
-              src="/assets/persons/2.jpeg"
+              src={Users.filter((u) => u.id === post.id)[0].profilePicture}
               alt=""
               className="postProfileImg"
             />
-            <span className="postUsername">Rohan Roy</span>
-            <div className="postDate">5 min ago</div>
+            <span className="postUsername">
+              {Users.filter((u) => u.id === post?.userId)[0].username}
+            </span>
+            <div className="postDate">{post.date}</div>
           </div>
           <div className="postTopRight">
             <MoreVert />
           </div>
         </div>
         <div className="postCenter">
-          <span className="postText">Its my first text.</span>
-          <img src="/assets/posts/1.jpeg" alt="" className="postImg" />
+          <span className="postText">{post?.desc}</span>
+          <img src={post.photo} alt="" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img className="likeIcon" src="/assets/like.png" alt="" />
             <img className="likeIcon" src="/assets/heart.png" alt="" />
-            <span className="likeCounter">430 people like it</span>
+            <span className="likeCounter">{post.like} people like it</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">1k Comments</span>
+            <span className="postCommentText">{post.comment} Comments</span>
           </div>
         </div>
       </div>
