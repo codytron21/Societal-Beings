@@ -55,7 +55,15 @@ export default function Rightbar({ profile }) {
               alt=""
               className="rightbarFollowingImg"
             />
-            <span className="rightbarFollowingName">fugga</span>
+            <span className="rightbarFollowingName">Jerry</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img
+              src="assets/persons/1.jpeg"
+              alt=""
+              className="rightbarFollowingImg"
+            />
+            <span className="rightbarFollowingName">PUBG</span>
           </div>
           <div className="rightbarFollowing">
             <img
@@ -71,15 +79,7 @@ export default function Rightbar({ profile }) {
               alt=""
               className="rightbarFollowingImg"
             />
-            <span className="rightbarFollowingName">fugga</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="assets/persons/1.jpeg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">fugga</span>
+            <span className="rightbarFollowingName">Jerry</span>
           </div>
           <div className="rightbarFollowing">
             <img
