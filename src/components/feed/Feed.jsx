@@ -11,8 +11,8 @@ export default function Feed() {
   // if we dont use async and await,it will return promises instead of data.
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("posts/timeline/616baf484afebd3fee06ac44"); //it will return a response,so   storing it in res.
-      console.log(res);
+      const res = await axios.get("posts/timeline/616baf484afebd3fee06ac44"); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
+      setPosts(res.data);
     };
     fetchPosts();
   }, []); //here giving empty array, acts as dependecy - useEffect runs only once when feed renderes.
@@ -21,9 +21,9 @@ export default function Feed() {
     <div className="feed">
       <div className="feedWrapper">
         <Share />
-        {/* {Posts.map((p) => (
+        {posts.map((p) => (
           <Post key={p.id} post={p} />
-        ))} */}
+        ))}
       </div>
     </div>
   );
