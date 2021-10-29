@@ -2,6 +2,7 @@ import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { format } from "timeago.js";
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
@@ -13,7 +14,7 @@ export default function Post({ post }) {
       setUser(res.data);
     };
     fetchUser();
-  }, []);
+  }, [post.userId]);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -30,7 +31,7 @@ export default function Post({ post }) {
               className="postProfileImg"
             />
             <span className="postUsername">{user.username}</span>
-            <div className="postDate">{post.date}</div>
+            <div className="postDate">{format(post.createdAt)}</div>
           </div>
           <div className="postTopRight">
             <MoreVert />
