@@ -3,7 +3,7 @@ import Share from "../share/Share";
 import Post from "../post/Post";
 import { useState, useEffect } from "react";
 import axios from "axios";
-export default function Feed() {
+export default function Feed({ username }) {
   const [posts, setPosts] = useState([]); //initial state will be empty array.
 
   //to render the feed:
@@ -11,11 +11,13 @@ export default function Feed() {
   // if we dont use async and await,it will return promises instead of data.
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("posts/timeline/616baf484afebd3fee06ac44"); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
+      const res = username
+        ? await axios.get("/posts/profile/" + username)
+        : await axios.get("/posts/timeline/616baf484afebd3fee06ac44"); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
       setPosts(res.data);
     };
     fetchPosts();
-  }, []); //here giving empty array, acts as dependecy - useEffect runs only once when feed renderes.
+  }, [username]); //here giving empty array, acts as dependecy - useEffect runs only once when feed renderes.
 
   return (
     <div className="feed">
