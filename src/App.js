@@ -25,7 +25,7 @@ export default function App() {
             <Switch>
                 {/* we added "exact" before path so that it deosnt stop at "/" and see complete path */}
                 <Route exact path="/">
-                    {user ? <Home /> : <Register />}
+                    {user ? <Home /> : <Login />}
                 </Route>
                 <Route path="/login">
                     {user ? <Redirect to="/" /> : <Login />}
