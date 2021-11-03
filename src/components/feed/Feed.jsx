@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]); //initial state will be empty array.
   const { user } = useContext(AuthContext);
-  console.log(user._id);
+
   //to render the feed:
   //we can not use async with arrow function of useEffect so we create a function inside and apply async.
   // if we dont use async and await,it will return promises instead of data.
