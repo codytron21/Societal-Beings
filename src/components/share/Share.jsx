@@ -1,10 +1,12 @@
 import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
 import { useContext, useRef, useState } from "react";
-import axios from "axios";
+
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 export default function Share() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const desc = useRef();
   const { user } = useContext(AuthContext);
   // useEffect(() => {
   //   () => {};
@@ -16,11 +18,27 @@ export default function Share() {
       userId: user._id,
       desc: desc.current.value,
     };
+    //if there is file we will first upload data to our storage,then post it.
+    if (file) {
+      const data = new FormData();
+      //to avoid conflict in due to same name of files by different user
+      // we add some date related number in the filenames so each file stay unique in its name.
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+      try {
+        await axios.post("/upload", data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     try {
       await axios.post("/posts", newPost);
+      window.location.reload();
     } catch (err) {}
   };
-  const desc = useRef();
+
   return (
     <div className="share">
       <div className="shareWrapper">

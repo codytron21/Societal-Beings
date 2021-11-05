@@ -16,7 +16,13 @@ export default function Feed({ username }) {
       const res = username
         ? await axios.get("/posts/profile/" + username)
         : await axios.get("/posts/timeline/" + user._id); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
-      setPosts(res.data);
+      // setPosts(res.data); this gives post in unsorted way.
+      // sorting posts according to latest posts.
+      setPosts(
+        res.data.sort((p1, p2) => {
+          return new Date(p2.createdAt) - new Date(p1.createdAt);
+        })
+      );
     };
     fetchPosts();
   }, [username, user._id]); //here giving empty array, acts as dependecy - useEffect runs only once when feed renderes.
