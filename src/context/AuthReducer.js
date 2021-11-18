@@ -18,6 +18,24 @@ const AuthReducer = (state, action) => {
                 isFetching: false,
                 error: action.payload,
             }
+        case "FOLLOW":
+            return {
+                ...state, //it copies the the previous state as it is.("..." it is called spread operator).
+                user: {
+                    ...state.user, //it copies details of user.
+                    //to assign new value to any value of user.
+                    followings: [...state.user.followings, action.payload]
+                }
+            }
+        case "UNFOLLOW":
+            return {
+                ...state, //it copies the the previous state as it is.("..." it is called spread operator).
+                user: {
+                    ...state.user, //it copies details of user.
+                    //filtering and removing a particular user.
+                    followings: state.user.followings.filter((following) => following !== action.payload)
+                }
+            }
         default:
             return state;
     }

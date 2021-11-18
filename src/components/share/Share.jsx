@@ -1,5 +1,11 @@
 import "./share.css";
-import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
+import {
+  PermMedia,
+  Label,
+  Room,
+  EmojiEmotions,
+  Cancel,
+} from "@material-ui/icons";
 import { useContext, useRef, useState } from "react";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -59,6 +65,14 @@ export default function Share() {
           />
         </div>
         <hr className="shareHr" />
+        {/* creating a div depending upon if we have selected a file or not for preview */}
+        {file && (
+          <div className="shareImgContainer">
+            {/* "URL.createObjectURL()"  this create a pseudo url for our file.*/}
+            <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
+            <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+          </div>
+        )}
         <form className="shareBottom" onSubmit={submitHandler}>
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">

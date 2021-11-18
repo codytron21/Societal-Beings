@@ -14,3 +14,11 @@ export const LoginFailure = (error) => ({
     // we will  pass error as payload to reducer.
     payload: error,
 });
+export const Follow = (userId) => ({
+    type: "FOLLOW",
+    payload: userId,
+});
+export const UNFOLLOW = (userId) => ({
+    type: "UNFOLLOW",
+    payload: userId,
+});

@@ -30,7 +30,8 @@ export default function Feed({ username }) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        {/* if username in the params is equal to current username than show "share" component. */}
+        {(!username || username === user.username) && <Share />}
         {posts.map((p) => (
           <Post key={p._id} post={p} />
         ))}
