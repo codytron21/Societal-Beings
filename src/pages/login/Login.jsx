@@ -3,10 +3,11 @@ import { useRef, useContext } from "react";
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 import { CircularProgress } from "@material-ui/core";
+import { Link } from "react-router-dom";
 export default function Login() {
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, dispatch } = useContext(AuthContext);
+  const { isFetching, dispatch } = useContext(AuthContext);
   const handleClick = (e) => {
     e.preventDefault(); //this prevent the default of refreshing the page on submitting.
     loginCall(
@@ -14,7 +15,7 @@ export default function Login() {
       dispatch
     );
   };
-  console.log(user);
+
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -49,13 +50,15 @@ export default function Login() {
               )}
             </button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              {isFetching ? (
-                <CircularProgress size="25px" color="white" />
-              ) : (
-                "Create a New Account"
-              )}
-            </button>
+            <Link to="/register">
+              <button className="createAccountButton">
+                {isFetching ? (
+                  <CircularProgress size="25px" color="white" />
+                ) : (
+                  "Create a New Account"
+                )}
+              </button>
+            </Link>
           </form>
         </div>
       </div>

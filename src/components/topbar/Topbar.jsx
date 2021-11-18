@@ -1,11 +1,16 @@
 import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 export default function Topbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
+  let history = useHistory();
+  function handleClick() {
+    localStorage.clear();
+    history.push("/login");
+  }
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -25,7 +30,9 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarLinks">
           <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          <span className="topbarLink" onClick={handleClick}>
+            Logout
+          </span>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">

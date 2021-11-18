@@ -1,6 +1,6 @@
 import "./register.css";
 import { useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 export default function Register() {
   const username = useRef();
@@ -69,8 +69,9 @@ export default function Register() {
               className="loginInput"
             />
             <button className="loginButton">Sign Up</button>
-
-            <button className="loginRegisterButton">LogIn</button>
+            <Link to="/login">
+              <button className="loginRegisterButton">LogIn</button>
+            </Link>
           </div>
         </div>
       </form>
