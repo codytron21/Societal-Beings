@@ -16,7 +16,7 @@
 }
 .chatBox{
     flex:5.5;
-}
+} 
 .chatBoxWrapper{
     display: flex;
     flex-direction: column;
