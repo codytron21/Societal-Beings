@@ -7,15 +7,54 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useRef } from "react";
+import { io } from "socket.io-client";
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [arrivalMessage, setArrivalMessage] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  // const [socket, setSocket] = useState(null);
   //for,when a new message is add it should scroll automatically.
   const scrollRef = useRef();
-
+  const socket = useRef(); //linking socket server with client.
   const { user } = useContext(AuthContext);
+
+  //alternate way to link socket server.
+  //using useEffect prevent from connecting multiple times as Messenger component refreshes.
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        senderId: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.senderId) &&
+      setMessages((prev) => [...prev, arrivalMessage]); //prev contains all the prev msg,adding new messages in it.
+  }, [arrivalMessage, currentChat]);
+  useEffect(() => {
+    // to send to socket server we use socket.emit
+    socket.current.emit("addUser", user._id);
+    //to take from socket server.
+    socket.current.on("getUsers", (users) => {
+      setOnlineUsers(
+        user.followings.filter((f) => users.some((u) => u.userId === f))
+      );
+    });
+  }, [user]);
+
+  // useEffect(() => {
+  //   // since socket intially is null we are using socket? to check if socket exist or not
+  //   socket?.on("welcome", (message) => {
+  //     console.log(message);
+  //   });
+  // }, [socket]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -47,6 +86,14 @@ export default function Messenger() {
       text: newMessage,
       conversationId: currentChat._id,
     };
+    const receiverId = currentChat.members.find(
+      (member) => member !== user._id
+    );
+    socket.current.emit("sendMessage", {
+      senderId: user._id,
+      receiverId,
+      text: newMessage,
+    });
     try {
       const res = await axios.post("/messages", message);
       setMessages([...messages, res.data]); //here ...messages will keep previous messages same and add new message.
@@ -70,9 +117,9 @@ export default function Messenger() {
               placeholder="Search for friends"
               className="chatMenuInput"
             />
-            {conversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
-                <Converstion key={c} conversation={c} currentUser={user} />
+            {conversations.map((c, k) => (
+              <div key={k} onClick={() => setCurrentChat(c)}>
+                <Converstion conversation={c} currentUser={user} />
               </div>
             ))}
           </div>
@@ -82,8 +129,8 @@ export default function Messenger() {
             {currentChat ? (
               <>
                 <div className="chatBoxTop">
-                  {messages.map((m) => (
-                    <div ref={scrollRef}>
+                  {messages.map((m, k) => (
+                    <div key={k} ref={scrollRef}>
                       <Message message={m} own={m.sender === user._id} />
                     </div>
                   ))}
@@ -109,7 +156,11 @@ export default function Messenger() {
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">online</div>
-          <ChatOnline />
+          <ChatOnline
+            onlineUsers={onlineUsers}
+            currentId={user._id}
+            setCurrentChat={setCurrentChat}
+          />
         </div>
       </div>
     </>

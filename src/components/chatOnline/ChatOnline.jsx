@@ -1,30 +1,55 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import "./chatOnline.css";
+export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
+  const [friends, setFriends] = useState([]);
+  const [onlineFriends, setOnlineFriends] = useState([]);
+  useEffect(() => {
+    const getFriends = async () => {
+      const res = await axios.get("/users/friends/" + currentId);
+      setFriends(res.data);
+    };
+    getFriends();
+  }, [currentId]);
 
-export default function chatOnline() {
+  useEffect(() => {
+    setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
+  }, [friends, onlineUsers]);
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const handleClick = async (user) => {
+    try {
+      const res = await axios.get(
+        `/conversations/find/${currentId}/${user._id}`
+      );
+      setCurrentChat(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="chatOnline">
-      <div className="chatOnlineFriend">
-        <div className="chatOnlineImgContainer">
-          <img src={`${PF}/persons/1.jpeg`} alt="" className="chatOnlineImg" />
-          <div className="chatOnlineBadge"></div>
+      {onlineFriends.map((o, k) => (
+        <div
+          className="chatOnlineFriend"
+          key={k}
+          onClick={() => handleClick(o)}
+        >
+          <div className="chatOnlineImgContainer">
+            <img
+              src={
+                o?.profilePicture
+                  ? PF + o.profilePicture
+                  : PF + "persons/noAvatar.png"
+              }
+              alt=""
+              className="chatOnlineImg"
+            />
+            <div className="chatOnlineBadge"></div>
+          </div>
+          <span className="chatOnlineName">{o?.username}</span>
         </div>
-        <span className="chatOnlineName">rohan</span>
-      </div>
-      <div className="chatOnlineFriend">
-        <div className="chatOnlineImgContainer">
-          <img src={`${PF}/persons/1.jpeg`} alt="" className="chatOnlineImg" />
-          <div className="chatOnlineBadge"></div>
-        </div>
-        <span className="chatOnlineName">rohan</span>
-      </div>
-      <div className="chatOnlineFriend">
-        <div className="chatOnlineImgContainer">
-          <img src={`${PF}/persons/1.jpeg`} alt="" className="chatOnlineImg" />
-          <div className="chatOnlineBadge"></div>
-        </div>
-        <span className="chatOnlineName">rohan</span>
-      </div>
+      ))}
     </div>
   );
 }
