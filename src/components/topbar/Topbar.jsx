@@ -10,6 +10,7 @@ export default function Topbar() {
   function handleClick() {
     localStorage.clear();
     history.push("/login");
+    window.location.reload(false);
   }
   return (
     <div className="topbarContainer">
@@ -29,8 +30,8 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <Link to="/messenger" style={{ textDecoration: "none" }}>
-            <span className="topbarLink">Messenger</span>
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <span className="topbarLink">Homepage</span>
           </Link>
           <span className="topbarLink" onClick={handleClick}>
             Logout
@@ -42,7 +43,12 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
           <div className="topbarIconItem">
-            <Chat />
+            <Link
+              to="/messenger"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Chat />
+            </Link>
             <span className="topbarIconBadge">1</span>
           </div>
           <div className="topbarIconItem">
