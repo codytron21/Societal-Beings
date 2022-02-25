@@ -29,7 +29,9 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
+          <Link to="/messenger" style={{ textDecoration: "none" }}>
+            <span className="topbarLink">Messenger</span>
+          </Link>
           <span className="topbarLink" onClick={handleClick}>
             Logout
           </span>
