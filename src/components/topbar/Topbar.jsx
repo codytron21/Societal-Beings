@@ -9,7 +9,7 @@ export default function Topbar() {
   let history = useHistory();
   function handleClick() {
     localStorage.clear();
-    history.push("/login");
+    history.push("/");
     window.location.reload(false);
   }
   return (
