@@ -4,7 +4,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../config";
 import { useParams } from "react-router";
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -12,7 +12,7 @@ export default function Profile() {
   const username = useParams().username; //we have passed username as params in app.js for calling profile
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
+      const res = await axiosInstance.get(`/users?username=${username}`); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
       setUser(res.data);
     };
     fetchUser();

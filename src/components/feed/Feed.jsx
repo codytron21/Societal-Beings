@@ -3,7 +3,7 @@ import Share from "../share/Share";
 import Post from "../post/Post";
 import { AuthContext } from "../../context/AuthContext";
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../config";
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]); //initial state will be empty array.
   const { user } = useContext(AuthContext);
@@ -14,8 +14,8 @@ export default function Feed({ username }) {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
-        ? await axios.get("/posts/profile/" + username)
-        : await axios.get("/posts/timeline/" + user._id); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
+        ? await axiosInstance.get("/posts/profile/" + username)
+        : await axiosInstance.get("/posts/timeline/" + user._id); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
       // setPosts(res.data); this gives post in unsorted way.
       // sorting posts according to latest posts.
       setPosts(

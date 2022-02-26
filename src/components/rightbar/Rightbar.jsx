@@ -2,7 +2,7 @@ import "./rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import { useContext, dispatch, useEffect, useState } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { Add, Remove } from "@material-ui/icons";
@@ -17,7 +17,9 @@ export default function Rightbar({ user }) {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
+        const friendList = await axiosInstance.get(
+          "/users/friends/" + user._id
+        );
         setFriends(friendList.data);
       } catch (err) {}
     };
@@ -26,12 +28,12 @@ export default function Rightbar({ user }) {
   const handleClick = async () => {
     try {
       if (followed) {
-        await axios.put("/users/" + user._id + "/unfollow", {
+        await axiosInstance.put("/users/" + user._id + "/unfollow", {
           userId: currentUser._id,
         });
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
-        await axios.put("/users/" + user._id + "/follow", {
+        await axiosInstance.put("/users/" + user._id + "/follow", {
           userId: currentUser._id,
         });
         dispatch({ type: "FOLLOW", payload: user._id });

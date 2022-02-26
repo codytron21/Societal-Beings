@@ -1,7 +1,7 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../config";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -16,7 +16,7 @@ export default function Post({ post }) {
   }, [currentUser._id, post.likes]);
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?userId=${post.userId}`); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
+      const res = await axiosInstance.get(`/users?userId=${post.userId}`); //it will return a object as response,so storing it in res... this object contain our data as key "data" so we access data by ("(the returned object).data") res.data.
       setUser(res.data);
     };
     fetchUser();
@@ -24,7 +24,9 @@ export default function Post({ post }) {
 
   const likeHandler = () => {
     try {
-      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id });
+      axiosInstance.put("/posts/" + post._id + "/like", {
+        userId: currentUser._id,
+      });
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
