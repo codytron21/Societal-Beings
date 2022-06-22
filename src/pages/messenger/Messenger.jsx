@@ -24,7 +24,8 @@ export default function Messenger() {
   //alternate way to link socket server.
   //using useEffect prevent from connecting multiple times as Messenger component refreshes.
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    // socket.current = io("ws://localhost:8900");
+    socket.current = io("https://societal-messaging.herokuapp.com/");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         senderId: data.senderId,
